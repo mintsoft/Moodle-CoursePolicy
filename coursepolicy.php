@@ -1,4 +1,5 @@
-<?php /* coursepolicy.php by Nathaniel J. Bird (April 2007) for AliveTek, Inc. www.alivetek.com. 
+<?php
+/* coursepolicy.php by Nathaniel J. Bird (April 2007) for AliveTek, Inc. www.alivetek.com. 
 // This is based on the policy.php 
 // If an html file named coursepolicy#.php (# symbol replaced by an actual course id), then the page will be displayed 
 //    with a requirement to click "Yes" before being able to continue with the course.
@@ -23,28 +24,23 @@ if (!isloggedin()) {
 if ($agree and confirm_sesskey() and is_numeric($courseagreed)) {    // User has agreed
     $USER->coursepoliciesagreed .= ','.$courseagreed;
     if (!isguestuser()) {              // Don't remember guests
-    if (!set_field('user', 'coursepoliciesagreed', $USER->coursepoliciesagreed, 'id', $USER->id)) {
-        error('Could not save your agreement');
+        if (!$DB->set_field('user', 'coursepoliciesagreed', $USER->coursepoliciesagreed, array('id' =>  $USER->id))) {
+            error('Could not save your agreement');
+        }
     }
-}
-
-if (!empty($SESSION->wantsurl)) {
-    $wantsurl = $SESSION->wantsurl;
-    unset($SESSION->wantsurl);
-    redirect($wantsurl);
-} else {
-    redirect($CFG->wwwroot.'/');
-}
+    if (!empty($SESSION->wantsurl)) {
+        $wantsurl = $SESSION->wantsurl;
+        unset($SESSION->wantsurl);
+        redirect($wantsurl);
+    } else {
+        redirect($CFG->wwwroot.'/');
+    }
     exit;
 }
 
-$strpolicyagree = get_string('coursepolicyagree');
-$strpolicyagreement = get_string('coursepolicyagreement');
-$strpolicyagreementclick = get_string('coursepolicyagreementclick');
+$strpolicyagreement="Course Policy Agreement";
 
 print_header($strpolicyagreement, $SITE->fullname, $strpolicyagreement);
-
-print_heading($strpolicyagreement);
 
 if (empty($CFG->slasharguments)) {
     $coursepolicypage = $CFG->wwwroot.'/file.php?file=/1/coursepolicy'.$id.'.html';
@@ -64,8 +60,9 @@ $linkyes    = 'coursepolicy.php'; // Send back here to store agreement in the da
 $optionsyes = array('agree'=>1, 'sesskey'=>sesskey(), 'courseagreed'=>$id);
 $linkno     = $CFG->wwwroot; // Send user to home page if they don't agree
 $optionsno  = array('sesskey'=>sesskey());
-notice_yesno($strpolicyagree, $linkyes, $linkno, $optionsyes, $optionsno);
+
+$strpolicyagree='You must agree to this policy to continue using this site.  Do you agree?';
+
+echo $OUTPUT->confirm($strpolicyagree, new moodle_url($linkyes, $optionsyes), new moodle_url($linkno, $optionsno));
 
 print_footer();
-
-?>
