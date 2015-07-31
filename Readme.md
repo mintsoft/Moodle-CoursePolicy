@@ -9,11 +9,11 @@ we've run through.
 
 ## Coursepolicy.php by Nathaniel J. Bird (April 2007) for AliveTek, Inc. www.alivetek.com.
 
-This is based on the policy.php 
-If an html file named coursepolicy#.php (# symbol replaced by an actual course id), then the page will be displayed 
+* This is based on the policy.php 
+* If an html file named coursepolicy#.php (# symbol replaced by an actual course id), then the page will be displayed 
     with a requirement to click "Yes" before being able to continue with the course.
-Modifications to lib/moodlelib.php and lang/en_utf8/moodle.php are required. 
-A new VARCHAR field named coursepoliciesagreed is required in the mdl_user table also. 
+* Modifications to `lib/moodlelib.php` and `lang/en/moodle.php` are required. 
+* A new VARCHAR field named `coursepoliciesagreed` is required in the `mdl_user` table also. 
 
 
 1. Add column coursepoliciesagreed VARCHAR(255) to mdl_user table
