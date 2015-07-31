@@ -5,17 +5,13 @@
 //    with a requirement to click "Yes" before being able to continue with the course.
 // Modifications to lib/moodlelib.php and lang/en_utf8/moodle.php are required. 
 // A new VARCHAR field named coursepoliciesagreed is required in the mdl_user table also. 
-*/
 
-/*
-//	hacked by RE for in Moodle 2.3.1 'support'
-*/
 
 1. Add column coursepoliciesagreed VARCHAR(255) to mdl_user table
 
 This field is needed to save a string of course IDs
 
-2. Add to lang/en_utf8/moodle.php :
+2. Add to lang/en/moodle.php :
 
 $string['coursepolicyagree'] = 'You must agree to this policy to continue using this site.  Do you agree?';
 $string['coursepolicyagreement'] = 'Course Policy Agreement';

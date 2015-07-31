@@ -40,7 +40,8 @@ if ($agree and confirm_sesskey() and is_numeric($courseagreed)) {    // User has
 
 $strpolicyagreement="Course Policy Agreement";
 
-print_header($strpolicyagreement, $SITE->fullname, $strpolicyagreement);
+//This needs switching to use $PAGE (https://docs.moodle.org/dev/Page_API)
+//print_header($strpolicyagreement, $SITE->fullname, $strpolicyagreement);
 
 if (empty($CFG->slasharguments)) {
     $coursepolicypage = $CFG->wwwroot.'/file.php?file=/1/coursepolicy'.$id.'.html';
