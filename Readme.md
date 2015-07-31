@@ -30,7 +30,7 @@ we've run through.
 
    The attached zip file contains the coursepolicy.php. Upload it to moodle/user/
 
-4a. Find in lib/moodlelib.php :
+4. Find in lib/moodlelib.php :
 ```php
 	if (!$USER->policyagreed and !is_siteadmin()) {
         if (!empty($CFG->sitepolicy) and !isguestuser()) {
@@ -52,7 +52,7 @@ we've run through.
         }
     }
 ```
-4b. After that section, add this code to lib/moodlelib.php :
+5. After that section, add this code to lib/moodlelib.php :
 ```php
     // Check that the user has agreed to the course policy if there is one
     if (file_exists($CFG->dataroot.'/1/coursepolicy'.$course->id.'.html')) {
@@ -64,4 +64,4 @@ we've run through.
         }
     }
 ```
-5. If you are logged on as a test user, log OFF before trying again!
+6. If you are logged on as a test user, log OFF before trying again!
